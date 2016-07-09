@@ -13,8 +13,13 @@ function rand(){
 }
 
 function sleep_rand(){
-    rnd=$(rand 1 7)
+    rnd=$(rand 1 9)
     echo "sleep $rnd"
+}
+
+function ratio_rand(){
+    rnd=$(rand 1 9)
+    echo $rnd
 }
 
 for service_id in {1..2}
@@ -52,6 +57,6 @@ do
    echo $cmd
 
    sleep_rand
-   cmd="curl -i -XPOST 'http://$host:$port/write?db=$dbname' --data-binary '$measurement,service_id=3,service_name=支付订单,app_id=C002,app_name=南京航空 biz_success=0.9,biz_fail=0.1'"
+   cmd="curl -i -XPOST 'http://$host:$port/write?db=$dbname' --data-binary '$measurement,service_id=3,service_name=支付订单,app_id=C002,app_name=南京航空 biz_success=0.$(ratio_rand),biz_fail=0.$(ratio_rand)'"
    echo $cmd
 done
